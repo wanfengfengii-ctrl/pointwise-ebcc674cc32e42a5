@@ -1,0 +1,47 @@
+{
+  "requests": [
+    {
+      "request_id": "morning-A",
+      "stream_id": "instrument-A",
+      "events": [
+        {"kind":"schema","seq":0,"schema":[["sample","int"],["category",{"dict":{"id":7,"value":"text"}}],["observations",{"list":{"struct":[["category",{"dict":{"id":7,"value":"text"}}],["uv","int"]]}}]]},
+        {"kind":"dictionary","seq":1,"id":7,"type":"text","values":{"length":2,"validity":[true,true],"values":["甲","乙"]}},
+        {"kind":"batch","seq":2,"batch_id":"A-old","row_count":3,"columns":{
+          "sample":{"length":3,"validity":[true,true,true],"values":[101,102,103]},
+          "category":{"length":3,"validity":[true,true,true],"indices":[0,1,0]},
+          "observations":{"length":3,"validity":[true,true,false],"offsets":[0,3,3,4],"items":{"length":4,"validity":[true,true,false,true],"fields":{
+            "category":{"length":4,"validity":[true,true,true,true],"indices":[0,0,1,1]},
+            "uv":{"length":4,"validity":[true,true,true,true],"values":[10,11,999,999]}
+          }}}
+        }},
+        {"kind":"dictionary","seq":3,"id":7,"type":"text","values":{"length":2,"validity":[true,true],"values":["丙","丁"]}},
+        {"kind":"batch","seq":4,"batch_id":"A-new","row_count":1,"columns":{
+          "sample":{"length":1,"validity":[true],"values":[104]},
+          "category":{"length":1,"validity":[true],"indices":[0]},
+          "observations":{"length":1,"validity":[true],"offsets":[0,1],"items":{"length":1,"validity":[true],"fields":{
+            "category":{"length":1,"validity":[true],"indices":[0]},
+            "uv":{"length":1,"validity":[true],"values":[20]}
+          }}}
+        }},
+        {"kind":"end","seq":5}
+      ]
+    },
+    {
+      "request_id":"morning-B",
+      "stream_id":"instrument-B",
+      "events":[
+        {"kind":"schema","seq":0,"schema":[["sample","int"],["category",{"dict":{"id":7,"value":"text"}}],["observations",{"list":{"struct":[["category",{"dict":{"id":7,"value":"text"}}],["uv","int"]]}}]]},
+        {"kind":"dictionary","seq":1,"id":7,"type":"text","values":{"length":2,"validity":[true,true],"values":["X","Y"]}},
+        {"kind":"batch","seq":2,"batch_id":"B-first","row_count":1,"columns":{
+          "sample":{"length":1,"validity":[true],"values":[201]},
+          "category":{"length":1,"validity":[true],"indices":[1]},
+          "observations":{"length":1,"validity":[true],"offsets":[0,1],"items":{"length":1,"validity":[true],"fields":{
+            "category":{"length":1,"validity":[true],"indices":[0]},
+            "uv":{"length":1,"validity":[true],"values":[30]}
+          }}}
+        }},
+        {"kind":"end","seq":3}
+      ]
+    }
+  ]
+}

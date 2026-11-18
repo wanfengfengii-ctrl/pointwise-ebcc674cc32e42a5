@@ -1,0 +1,18 @@
+{
+  "rows": [
+    {"sample":101,"category":"甲","observations":[{"category":"甲","uv":10},{"category":"甲","uv":11},null]},
+    {"sample":102,"category":"乙","observations":[]},
+    {"sample":103,"category":"甲","observations":null},
+    {"sample":104,"category":"丙","observations":[{"category":"丙","uv":20}]},
+    {"sample":201,"category":"Y","observations":[{"category":"X","uv":30}]}
+  ],
+  "projection": [["甲","甲",null],[],null,["丙"],["X"]],
+  "profile": {
+    "counts": [
+      {"type":"text","value":"甲","count":2},
+      {"type":"text","value":"丙","count":1},
+      {"type":"text","value":"X","count":1}
+    ],
+    "nulls":2
+  }
+}
