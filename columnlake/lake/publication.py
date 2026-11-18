@@ -74,6 +74,10 @@ class Lake:
     def export(self, snapshot_id):
         return SnapshotExporter(self._store).export(snapshot_id)
 
+    def export_pairs(self, snapshot_id, left_stream, right_stream, tolerance):
+        return SnapshotExporter(self._store).export_pairs(
+            snapshot_id, left_stream, right_stream, tolerance)
+
 
 def demo():
     from columnlake.delivery.decoding import decode_export

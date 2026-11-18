@@ -9,9 +9,11 @@
 ```sh
 python3 -B -m unittest discover -s tests -p 'test_*.py'
 python3 -B -m columnlake.lake.publication --demo
+python3 -B pair_examples.py --verify
+python3 -B pair_examples.py --demo
 ```
 
-无需安装依赖。测试和demo只在各自临时目录创建数据库。demo读取项目中的有限输入及单独手算预期，断言查询、类别统计、独立训练解码、重开和重放结果，再打印POINTWISE_SCENARIO JSON。它不修改已有用户库。
+无需安装依赖。测试和demo只在各自临时目录创建数据库。demo读取项目中的有限输入及单独手算预期，断言查询、类别统计、独立训练解码、重开和重放结果，再打印POINTWISE_SCENARIO JSON。它不修改已有用户库。pair_examples.py的--verify保留完整回归并核对手算配对、离线解码、非法关系拒绝与固定快照重开；--demo演示贪心少配样例、关闭湖库后解码和重开配对。
 
 ## 一天的业务
 
@@ -48,6 +50,8 @@ read(snapshot_id, projection=None)返回按批次及行顺序排列的行。投�
 profile只接受最终为int或text的路径，返回CategoryProfile。counts按首次出现顺序排列，包含type、value和精确count；nulls单列。重复项逐次计数，空列表零项，NULL列表、NULL祖先或NULL叶沿可达分支贡献一个NULL。不同类型的类别分开统计。
 
 export返回ExportBundle，可调用to_obj或取payload JSON文本。decode_export只消费该对象或JSON，不持有连接、不调用主湖段解码器。编号和布局属于局部编码，不能跨批次直接合并字典目录。
+
+export_pairs(snapshot_id, left_stream, right_stream, tolerance)导出同一固定快照中两仪器流的对照训练交付：普通JSON对象，含version=2、调用参数、仅含所选两流批次的自足V1 sources、按左地址升序的matches及左先右后的unmatched。同一样本和类别、微伏差不超容差才可一对一配对；每组依次最大化对数、最小化总绝对差，再按来源地址取字典序最小关系。decode_export对新对象或其JSON文本独立核对来源审计、地址、组别、容差、无重复消费及完整覆盖后返回派生行，无需重新求最优。规则细节见PAIRS.md。
 
 ## 类型、错误和持久边界
 
